@@ -1,0 +1,35 @@
+name: VALORANT SHOP
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: "* 6 * * *"
+    - timezone: 'Asia/Kathmandu'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+
+      - name: Checking out repository content
+        uses: actions/checkout@v2
+
+      - name: Setting up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install requirements
+        run: |
+          pip install --upgrade pip
+          pip install -r "requirements.txt"
+          pip install -r "snd_requirements.txt"
+      
+      - name: Run the notifier
+        run: |
+          python shop_notifier_discord.py
+        env:
+          VAL_USERNAME: ${{ secrets.VAL_USERNAME }}
+          VAL_PASSWORD: ${{ secrets.VAL_USERNAME }}
+          VAL_REGION: ${{ secrets.VAL_REGION }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}

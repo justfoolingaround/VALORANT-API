@@ -1,0 +1,6 @@
+RIOTGAMES_HOST = "riotgames.com"
+
+AUTHENTICATION_URL = f"https://auth.{RIOTGAMES_HOST}/"
+ENTITLEMENTS_AUTHENTICATION_URL = f"https://entitlements.auth.{RIOTGAMES_HOST}/"
+
+AUTHENTICATION_ENDPOINT = AUTHENTICATION_URL + "api/v1/authorization"
